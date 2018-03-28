@@ -3,7 +3,7 @@ const {db, Pug, Coffee} = require('../server/models')
 module.exports = async () => {
   await db.sync({force: true})
 
-  const [coffee1, coffee2] = Promise.all([
+  const [coffee1, coffee2] = await Promise.all([
     Coffee.create({
       name: 'puppaccino',
       ingredients: ['espresso', 'frothed-milk', 'love']

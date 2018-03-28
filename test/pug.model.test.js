@@ -3,10 +3,10 @@
 const {expect} = require('chai')
 const {db, Pug, Coffee} = require('../server/models')
 
-xdescribe('Pug model', () => {
+describe('Pug model', () => {
   beforeEach(() => db.sync({force: true}))
 
-  xdescribe('column definitions and validations', () => {
+  describe('column definitions and validations', () => {
     it('has a `name`, `age`, and `biography`', async () => {
       const pug = await Pug.create({
         name: 'Cody',
@@ -53,7 +53,7 @@ xdescribe('Pug model', () => {
         ingredients: ['espresso', 'frothed milk', 'love']
       })
 
-      await pug.setCoffee(coffee)
+      await pug.setFavoriteCoffee(coffee)
 
       expect(pug.favoriteCoffeeId).to.be.equal(coffee.id)
     })
@@ -65,11 +65,11 @@ xdescribe('Pug model', () => {
       const friends = await penny.getFriends()
       expect(friends).to.be.an('array')
       expect(friends.length).to.equal(1)
-      expect(friends[0].name).to.equal('doug')
+      expect(friends[0].name).to.equal('Doug')
     })
   })
 
-  xdescribe('instance method: isPuppy', () => {
+  describe('instance method: isPuppy', () => {
     it('returns true if a pug is a puppy (less than one year old)', async () => {
       const pup = await Pug.create({name: 'Pupster', age: 0})
       const notPup = await Pug.create({name: 'Grouchy', age: 2})
@@ -79,7 +79,7 @@ xdescribe('Pug model', () => {
     })
   })
 
-  xdescribe('instance method: shortBio', () => {
+  describe('instance method: shortBio', () => {
     // Note: the first sentence might be defined as all of the text
     // leading up and including to the first period,
     // question mark, or exclamation point.
@@ -99,13 +99,13 @@ xdescribe('Pug model', () => {
         biography: 'Who is Penny the Pug? Only the most popular pug around!'
       })
 
-      expect(cody.shortBio()).to.be.equal('He is a pug.')
-      expect(doug.shortBio()).to.be.equal('He is internet famous!')
-      expect(penny.shortBio()).to.be.equal('Who is Penny the Pug?')
+      expect(cody.shortBio()).to.be.equal('He is a pug')
+      expect(doug.shortBio()).to.be.equal('He is internet famous')
+      expect(penny.shortBio()).to.be.equal('Who is Penny the Pug')
     })
   })
 
-  xdescribe('class method: `findByCoffee`', () => {
+  describe('class method: `findByCoffee`', () => {
     it('finds all pugs with the given favorite coffee', async () => {
       const latte = await Coffee.create({name: 'latte'})
       const cortado = await Coffee.create({name: 'cortado'})
@@ -137,7 +137,7 @@ xdescribe('Pug model', () => {
     })
   })
 
-  xdescribe('hooks', () => {
+  describe('hooks', () => {
     it('capitalizes a pug\'s name before saving it to the database', async () => {
       const pug = await Pug.create({name: 'joe'})
 

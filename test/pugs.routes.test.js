@@ -22,7 +22,7 @@ describe('Routes', () => {
   })
 
   describe('/pugs', () => {
-    xdescribe('GET /pugs', async () => {
+    describe('GET /pugs', () => {
       it('sends all pugs', () => {
         return agent
           .get('/api/pugs')
@@ -36,12 +36,12 @@ describe('Routes', () => {
       })
     })
 
-    xdescribe('GET /pugs/favoriteCoffee/:favoriteCoffeeName', () => {
+    describe('GET /pugs/favoriteCoffee/:favoriteCoffeeName', () => {
       // Be careful about the order in which you register your routes!
       // Don't forget that Express evaluates them in the order in which they're defined!
       it('sends all pugs based on the specified favorite coffe name', async () => {
         await agent
-          .get('/api/pugs/puppaccino')
+          .get('/api/pugs/favoriteCoffee/puppaccino')
           .expect(200)
           .then((res) => {
             expect(res.body).to.be.an('array')
@@ -51,7 +51,7 @@ describe('Routes', () => {
           })
 
         await agent
-          .get('/api/pugs/mocha')
+          .get('/api/pugs/favoriteCoffee/mocha')
           .expect(200)
           .then((res) => {
             expect(res.body).to.be.an('array')
@@ -64,7 +64,7 @@ describe('Routes', () => {
         sinon.spy(Pug, 'findByCoffee')
 
         await agent
-          .get('/api/pugs/puppaccino')
+          .get('/api/pugs/favoriteCoffee/puppaccino')
           .expect(200)
           .then((res) => {
             expect(Pug.findByCoffee.calledOnce).to.equal(true)
@@ -78,7 +78,7 @@ describe('Routes', () => {
       })
     })
 
-    xdescribe('GET /pugs/:pugId', () => {
+    describe('GET /pugs/:pugId', () => {
       it('gets the pug with the specified id', async () => {
         await agent
           .get(`/api/pugs/${cody.id}`)
@@ -104,7 +104,7 @@ describe('Routes', () => {
       })
     })
 
-    xdescribe('POST /pugs', () => {
+    describe('POST /pugs', () => {
       it('creates a new pug and sends back the new pug', async () => {
         await agent
           .post('/api/pugs')
@@ -128,10 +128,10 @@ describe('Routes', () => {
       })
     })
 
-    xdescribe('PUT /pugs/:pugId', () => {
+    describe('PUT /pugs/:pugId', () => {
       it('updates an existing pug', async () => {
         await agent
-          .post(`/api/pugs/${cody.id}`)
+          .put(`/api/pugs/${cody.id}`)
           .send({
             favoriteCoffeeId: mocha.id
           })
@@ -148,12 +148,12 @@ describe('Routes', () => {
 
       it('sends a 404 if not found', () => {
         return agent
-          .delete(`/api/pugs/20`)
+          .put(`/api/pugs/20`)
           .expect(404)
       })
     })
 
-    xdescribe('DELETE /pugs/:pugId', async () => {
+    describe('DELETE /pugs/:pugId', async () => {
       it('removes a pug from the database', async () => {
         await agent
           .delete(`/api/pugs/${doug.id}`) // Oh noes! Bye, Doug!

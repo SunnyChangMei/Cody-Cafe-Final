@@ -19,7 +19,7 @@ describe('Routes', () => {
   })
 
   describe('/coffee', () => {
-    xdescribe('GET /coffee', async () => {
+    describe('GET /coffee', () => {
       it('sends all coffee', () => {
         return agent
           .get('/api/coffee')
@@ -32,12 +32,12 @@ describe('Routes', () => {
       })
     })
 
-    xdescribe('GET /coffee/ingredients/:ingredientName', () => {
+    describe('GET /coffee/ingredients/:ingredientName', () => {
       // Be careful about the order in which you register your routes!
       // Don't forget that Express evaluates them in the order in which they're defined!
       it('sends all coffee based on the specified favorite coffe name', async () => {
         await agent
-          .get('/api/coffee/frothed-milk')
+          .get('/api/coffee/ingredients/frothed-milk')
           .expect(200)
           .then((res) => {
             expect(res.body).to.be.an('array')
@@ -46,7 +46,7 @@ describe('Routes', () => {
           })
 
         await agent
-          .get('/api/coffee/hot-cocoa')
+          .get('/api/coffee/ingredients/hot-cocoa')
           .expect(200)
           .then((res) => {
             expect(res.body).to.be.an('array')
@@ -55,7 +55,7 @@ describe('Routes', () => {
           })
 
         await agent
-          .get('/api/coffee/love')
+          .get('/api/coffee/ingredients/love')
           .expect(200)
           .then((res) => {
             expect(res.body).to.be.an('array')
@@ -69,7 +69,7 @@ describe('Routes', () => {
         sinon.spy(Coffee, 'findByIngredient')
 
         await agent
-          .get('/api/coffee/frothed-milk')
+          .get('/api/coffee/ingredients/frothed-milk')
           .expect(200)
           .then((res) => {
             expect(Coffee.findByIngredient.calledOnce).to.equal(true)
@@ -83,7 +83,7 @@ describe('Routes', () => {
       })
     })
 
-    xdescribe('GET /coffee/:coffeeId', () => {
+    describe('GET /coffee/:coffeeId', () => {
       it('gets the coffee with the specified id', async () => {
         await agent
           .get(`/api/coffee/${puppaccino.id}`)
@@ -98,7 +98,7 @@ describe('Routes', () => {
           .expect(200)
           .then((res) => {
             expect(res.body).to.be.an('object')
-            expect(res.body.name).to.equal(mocha.id)
+            expect(res.body.name).to.equal(mocha.name)
           })
       })
 
@@ -109,7 +109,7 @@ describe('Routes', () => {
       })
     })
 
-    xdescribe('POST /coffee', () => {
+    describe('POST /coffee', () => {
       it('creates a new coffee and sends back the new coffee', async () => {
         await agent
           .post('/api/coffee')
