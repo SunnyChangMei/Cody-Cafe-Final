@@ -5,6 +5,7 @@ const {Coffee} = require('../models')
 // Remember that these routes are already mounted on
 // /api/coffee!
 
+<<<<<<< HEAD
 router.get('/', (req, res, next) => {
   Coffee.findAll()
     .then(coffee => res.json(coffee))
@@ -35,4 +36,6 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
+=======
+>>>>>>> 0be07d07494b6bcf0057efd41c0c8ff51dffd8fb
 module.exports = router

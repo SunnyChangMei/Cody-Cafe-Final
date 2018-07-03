@@ -1,3 +1,4 @@
+// do not modify this file
 const {db, Pug, Coffee} = require('../server/models')
 
 module.exports = async () => {

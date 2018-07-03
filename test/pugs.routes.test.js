@@ -18,6 +18,7 @@ describe('Routes', () => {
   let puppaccino, mocha, cody, doug, penny
 
   beforeEach(async () => {
+    // Yum! My favorite is Puppaccino!
     [puppaccino, mocha, cody, doug, penny] = await seed()
   })
 

@@ -45,7 +45,8 @@ describe('Pug model', () => {
       expect(pug.biography).to.equal(longBio)
     })
 
-    // note: this requires a working Coffee model
+    // Make sure that you define the associations in `server/models/index.js`!
+    // Note: this requires a working Coffee model
     it('has a one-many relationship with Coffee, via `favoriteCoffee`', async () => {
       const pug = await Pug.create({name: 'Joe'})
       const coffee = await Coffee.create({
@@ -58,6 +59,8 @@ describe('Pug model', () => {
       expect(pug.favoriteCoffeeId).to.be.equal(coffee.id)
     })
 
+    // Make sure that you define the associations in `server/models/index.js`!
+    // Note: be careful - the pluralization is important here!
     it('has a many-many relationship with other Pugs as `friends`', async () => {
       const penny = await Pug.create({name: 'Penny'})
       const doug = await Pug.create({name: 'Doug'})
@@ -81,7 +84,7 @@ describe('Pug model', () => {
 
   describe('instance method: shortBio', () => {
     // Note: the first sentence might be defined as all of the text
-    // leading up and including to the first period,
+    // leading up to but not including the first period,
     // question mark, or exclamation point.
     it('returns first sentence of bio', async () => {
       const cody = await Pug.create({
@@ -105,6 +108,7 @@ describe('Pug model', () => {
     })
   })
 
+  // Check out: http://docs.sequelizejs.com/manual/tutorial/querying.html#relations-associations
   describe('class method: `findByCoffee`', () => {
     it('finds all pugs with the given favorite coffee', async () => {
       const latte = await Coffee.create({name: 'latte'})

@@ -48,6 +48,16 @@ describe('Coffee model', () => {
     })
   })
 
+  // Arf! You'll use the Sequelize.Op.contains operator here!
+  // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+  // Be careful! It's a little bit unintuitive because the value you're
+  // querying for needs to be in an array (even if it's just one value):
+  //
+  // where: {
+  //   my_array: {
+  //     [Op.contains]: ['thing']
+  //   }
+  // }
   describe('class method: findByIngredient', () => {
     it('finds coffee by ingredient', async () => {
       await Promise.all([

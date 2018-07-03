@@ -26,7 +26,7 @@ We're building out the cafe's backend! Here's what I have planned:
   * The specs are in `test/coffee.model.test.js`
 
 * There will be a `Pug` model, representing a `pugs` database table (containing all my pug friends!)
-  * This will go in `server/models/pug.model.js`
+  * This will go in `server/models/pug.model.js`, and you can set associations in `models/index.js`
   * The specs are in `test/pug.model.test.js`
 
 * We'll serve up the coffee resource via `/api/coffee`!
