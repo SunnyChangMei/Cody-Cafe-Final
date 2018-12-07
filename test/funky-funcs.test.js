@@ -57,12 +57,12 @@ describe('Funky functions', () => {
     })
 
     it('EXTRA CREDIT: works for any number of arrays', () => {
-      const arr1 = [1, 2, 3]
-      const arr2 = [4, 5, 6]
-      const arr3 = [2, 1, 1]
-      const arr4 = [6, 1, 8]
+      const arr1 = [1, 2, 3, 7]
+      const arr2 = [1, 4, 5, 2]
+      const arr3 = [2, 1, 1, 9]
+      const arr4 = [6, 1, 2, 8]
 
-      expect(intersection(arr1, arr2, arr3, arr4)).to.deep.equal([1, 2, 6])
+      expect(intersection(arr1, arr2, arr3, arr4)).to.deep.equal([1, 2])
     })
   }) // end: intersection
 
