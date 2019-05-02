@@ -44,9 +44,9 @@ Pug.findByCoffee = async typeOfCoffee => {
   return favoriteCoffee;
 };
 
-Pug.beforeValidate(pug => {
+Pug.beforeValidate(async pug => {
   if (!pug.name) return;
-  pug.name = pug.name[0].toUpperCase() + pug.name.slice(1);
+  pug.name = await pug.name[0].toUpperCase() + pug.name.slice(1);
 });
 
 module.exports = Pug;
