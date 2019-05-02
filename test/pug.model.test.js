@@ -82,7 +82,7 @@ describe('Pug model', () => {
     });
   });
 
-  xdescribe('instance method: shortBio', () => {
+  describe('instance method: shortBio', () => {
     // Note: the first sentence might be defined as all of the text
     // leading up to but not including the first period,
     // question mark, or exclamation point.
@@ -109,7 +109,7 @@ describe('Pug model', () => {
   });
 
   // Check out: http://docs.sequelizejs.com/manual/tutorial/querying.html#relations-associations
-  xdescribe('class method: `findByCoffee`', () => {
+  describe('class method: `findByCoffee`', () => {
     it('finds all pugs with the given favorite coffee', async () => {
       const latte = await Coffee.create({name: 'latte'});
       const cortado = await Coffee.create({name: 'cortado'});
@@ -141,7 +141,7 @@ describe('Pug model', () => {
     });
   });
 
-  xdescribe('hooks', () => {
+  describe('hooks', () => {
     it('capitalizes a pug\'s name before saving it to the database', async () => {
       const pug = await Pug.create({name: 'joe'});
 
