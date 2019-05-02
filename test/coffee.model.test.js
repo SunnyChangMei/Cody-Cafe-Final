@@ -1,52 +1,52 @@
 /* eslint-env mocha, chai */
 
-const {expect} = require('chai')
-const {db, Coffee} = require('../server/models')
+const {expect} = require('chai');
+const {db, Coffee} = require('../server/models');
 
-xdescribe('Coffee model', () => {
-  beforeEach(() => db.sync({force: true}))
+describe('Coffee model', () => {
+  beforeEach(() => db.sync({force: true}));
 
-  xdescribe('column definitions and validations', () => {
+  describe('column definitions and validations', () => {
     it('has a `name` and `ingredients`', async () => {
       const puppaccino = await Coffee.create({
         name: 'Puppaccino',
         ingredients: ['espresso', 'frothed milk', 'love']
-      })
+      });
 
-      expect(puppaccino.name).to.equal('Puppaccino')
-      expect(puppaccino.ingredients).to.deep.equal(['espresso', 'frothed milk', 'love'])
-    })
+      expect(puppaccino.name).to.equal('Puppaccino');
+      expect(puppaccino.ingredients).to.deep.equal(['espresso', 'frothed milk', 'love']);
+    });
 
     it('`name` is required', async () => {
-      const coffee = Coffee.build()
+      const coffee = Coffee.build();
       return coffee.validate()
         .then(
           () => {
-            throw new Error('Validation should have failed!')
+            throw new Error('Validation should have failed!');
           },
           (err) => {
-            expect(err).to.be.an('error')
+            expect(err).to.be.an('error');
           }
-        )
-    })
-  })
+        );
+    });
+  });
 
-  xdescribe('instance method: getIngredients', () => {
+  describe('instance method: getIngredients', () => {
     it('returns list of ingredients as a comma-delimited string', async () => {
       const puppaccino = await Coffee.create({
         name: 'Puppaccino',
         ingredients: ['espresso', 'frothed milk', 'love']
-      })
+      });
 
       const frappeAllaPug = await Coffee.create({
         name: 'Frappe alla Pug',
         ingredients: ['espresso', 'ice', 'sugar', 'love']
-      })
+      });
 
-      expect(puppaccino.getIngredients()).to.equal('espresso, frothed milk, love')
-      expect(frappeAllaPug.getIngredients()).to.equal('espresso, ice, sugar, love')
-    })
-  })
+      expect(puppaccino.getIngredients()).to.equal('espresso, frothed milk, love');
+      expect(frappeAllaPug.getIngredients()).to.equal('espresso, ice, sugar, love');
+    });
+  });
 
   // Arf! You'll use the Sequelize.Op.contains operator here!
   // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
@@ -58,7 +58,7 @@ xdescribe('Coffee model', () => {
   //     [Op.contains]: ['thing']
   //   }
   // }
-  xdescribe('class method: findByIngredient', () => {
+  describe('class method: findByIngredient', () => {
     it('finds coffee by ingredient', async () => {
       await Promise.all([
         Coffee.create({
@@ -73,34 +73,34 @@ xdescribe('Coffee model', () => {
           name: 'Mocha',
           ingredients: ['espresso', 'hot cocoa', 'whipped cream']
         })
-      ])
-      const drinksWithEspresso = await Coffee.findByIngredient('espresso')
-      const drinksWithWhippedCream = await Coffee.findByIngredient('whipped cream')
+      ]);
+      const drinksWithEspresso = await Coffee.findByIngredient('espresso');
+      const drinksWithWhippedCream = await Coffee.findByIngredient('whipped cream');
 
-      expect(drinksWithEspresso.length).to.equal(2)
-      expect(drinksWithEspresso.some(drink => drink.name === 'Mocha')).to.equal(true)
-      expect(drinksWithEspresso.some(drink => drink.name === 'Galao')).to.equal(true)
+      expect(drinksWithEspresso.length).to.equal(2);
+      expect(drinksWithEspresso.some(drink => drink.name === 'Mocha')).to.equal(true);
+      expect(drinksWithEspresso.some(drink => drink.name === 'Galao')).to.equal(true);
 
-      expect(drinksWithWhippedCream.length).to.equal(1)
-      expect(drinksWithWhippedCream.some(drink => drink.name === 'Mocha')).to.equal(true)
-    })
-  })
+      expect(drinksWithWhippedCream.length).to.equal(1);
+      expect(drinksWithWhippedCream.some(drink => drink.name === 'Mocha')).to.equal(true);
+    });
+  });
 
-  xdescribe('hooks', () => {
+  describe('hooks', () => {
     // because EVERYTHING in Cody's Cafe is made with love ♥
     it('adds "love" to ingredients if not included', async () => {
       const coffee = await Coffee.create({
         name: 'Cafe con Leche',
         ingredients: ['coffee', 'warm milk']
-      })
+      });
 
-      expect(coffee.ingredients.indexOf('love') > -1).to.equal(true)
+      expect(coffee.ingredients.indexOf('love') > -1).to.equal(true);
 
       await coffee.update({
         ingredients: ['coffee', 'hot milk']
-      })
+      });
 
-      expect(coffee.ingredients.indexOf('love') > -1).to.equal(true)
-    })
-  })
-})
+      expect(coffee.ingredients.indexOf('love') > -1).to.equal(true);
+    });
+  });
+});
