@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('./database');
 const Coffee = require('./coffee.model');
-const Op = Sequelize.Op;
 
 const Pug = db.define('pugs', {
   // your code here

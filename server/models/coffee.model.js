@@ -25,6 +25,7 @@ Coffee.findByIngredient = async function(thing) {
       }
     }
   });
+
   return ingredient;
 };
 
